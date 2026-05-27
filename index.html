@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stock Card Dashboard v3</title>
+  <title>Stock Card Dashboard v4</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,26 +12,40 @@
     :root { --bg:#f7f6f2; --surface:#fbfbf9; --surface-2:#f0ede8; --border:#d8d3cb; --text:#26241d; --muted:#736e65; --primary:#01696f; --shadow:0 10px 28px rgba(0,0,0,.08); --radius:18px; }
     [data-theme="dark"] { --bg:#171614; --surface:#1d1c19; --surface-2:#26231f; --border:#38342e; --text:#e6e1d7; --muted:#aca598; --primary:#58a7ae; --shadow:0 10px 28px rgba(0,0,0,.35); }
     *{box-sizing:border-box} body{margin:0;font-family:Inter,sans-serif;background:var(--bg);color:var(--text)}
-    .wrap{max-width:1700px;margin:0 auto;padding:24px}.topbar{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap;margin-bottom:20px}
-    .title h1{margin:0;font-size:clamp(1.6rem,1.2rem + 1vw,2.2rem)} .title p{margin:6px 0 0;color:var(--muted);max-width:76ch}
+    .wrap{max-width:2600px;margin:0 auto;padding:22px}
+    .topbar{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap;margin-bottom:18px}
+    .title h1{margin:0;font-size:clamp(1.55rem,1.2rem + 1vw,2.15rem)} .title p{margin:6px 0 0;color:var(--muted);max-width:78ch;font-size:.96rem}
     .panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
     .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center} input,button{font:inherit}
-    .controls input{padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text);min-width:620px}
+    .controls input{padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text);min-width:680px}
     button{padding:12px 14px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-weight:700;cursor:pointer}.ghost{background:var(--surface-2);color:var(--text);border:1px solid var(--border)}
-    .status{margin-top:10px;color:var(--muted);font-size:.82rem}.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:430px}
-    .head{padding:16px;border-bottom:1px solid var(--border)} .row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start} .ticker{margin:0;font-size:1.35rem;font-weight:800}.meta{color:var(--muted);font-size:.8rem}.price{margin-top:10px;font-size:1.9rem;font-weight:800;letter-spacing:-.04em}.delta{font-size:.9rem;font-weight:800;margin-top:2px}.up{color:#2c7a3f}.down{color:#b33a3a}
-    .chart{height:132px}.alertbar{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:10px 16px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface-2)} .pill{padding:6px 10px;border-radius:999px;font-size:.78rem;font-weight:700}
+    .status{margin-top:10px;color:var(--muted);font-size:.92rem}
+    .grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:12px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:410px}
+    .head{padding:14px;border-bottom:1px solid var(--border)}
+    .row{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+    .ticker{margin:0;font-size:1.18rem;font-weight:800;line-height:1.1}.meta{color:var(--muted);font-size:.78rem}.price{margin-top:8px;font-size:1.55rem;font-weight:800;letter-spacing:-.04em}.delta{font-size:.88rem;font-weight:800;margin-top:1px}.up{color:#2c7a3f}.down{color:#b33a3a}
+    .chart{height:110px}
+    .alertbar{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface-2)}
+    .pill{padding:6px 10px;border-radius:999px;font-size:.77rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
     .buy{background:rgba(44,122,63,.14);color:#2c7a3f}.hold{background:rgba(0,100,148,.14);color:#006494}.watch{background:rgba(138,91,0,.14);color:#8a5b00}.trim{background:rgba(150,66,25,.14);color:#964219}.default{background:rgba(1,105,111,.14);color:#01696f}
-    .stats{display:grid;grid-template-columns:1fr 1fr}.stat{padding:11px 14px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}.stat:nth-child(2n){border-right:none}.label{font-size:.72rem;color:var(--muted)}.value{font-size:.92rem;font-weight:700;margin-top:2px}.rules{padding:12px 14px;color:var(--muted);font-size:.78rem;margin-top:auto}
-    @media (max-width:1400px){.grid{grid-template-columns:repeat(3,1fr)}} @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.controls input{min-width:260px}} @media (max-width:640px){.wrap{padding:14px}.grid{grid-template-columns:1fr}.controls input{width:100%;min-width:0}}
+    .stats{display:grid;grid-template-columns:1fr 1fr}
+    .stat{padding:10px 12px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}.stat:nth-child(2n){border-right:none}
+    .label{font-size:.76rem;color:var(--muted);line-height:1.1}.value{font-size:1rem;font-weight:700;margin-top:3px;line-height:1.15}
+    .rules{padding:11px 12px;color:var(--muted);font-size:.79rem;margin-top:auto;line-height:1.3}
+    @media (max-width:2200px){.grid{grid-template-columns:repeat(8,1fr)}}
+    @media (max-width:1800px){.grid{grid-template-columns:repeat(6,1fr)}.controls input{min-width:520px}}
+    @media (max-width:1450px){.grid{grid-template-columns:repeat(4,1fr)}}
+    @media (max-width:1040px){.grid{grid-template-columns:repeat(2,1fr)}.controls input{min-width:260px}}
+    @media (max-width:640px){.wrap{padding:14px}.grid{grid-template-columns:1fr}.controls input{width:100%;min-width:0}}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="topbar">
       <div class="title">
-        <h1>Stock Card Dashboard v3</h1>
-        <p>This version is connected to your published Google Sheets CSV feed and maps the first 10 rows into the dashboard. It uses the alert label already produced by your sheet instead of recalculating alerts in the browser.</p>
+        <h1>Stock Card Dashboard v4</h1>
+        <p>This version keeps the same overall visual style while expanding the layout to support up to 20 tickers. Cards are only drawn for rows that contain a ticker, so blank lines in DashboardFeed do not create empty dashboard slots.</p>
       </div>
       <div class="panel">
         <div class="controls">
@@ -61,36 +75,36 @@
       return rows.filter(r=>r.some(v=>String(v).trim()!=='')).map(r=>Object.fromEntries(headers.map((h,i)=>[h,r[i] ?? ''])));
     }
     function num(v){ if(v==null) return null; const s=String(v).replace(/[$,%\s,]/g,'').trim(); return s==='—' || s==='' ? null : Number(s); }
-    function pctOrNum(v){ const n=num(v); return n==null ? null : n; }
     function money(v){ return v==null || Number.isNaN(v) ? '—' : '$'+v.toFixed(2); }
     function cap(v){ const n=num(v); if(n==null) return '—'; if(n>=1000) return (n/1000).toFixed(2)+'T'; return n.toFixed(2)+'B'; }
     function alertClass(label){ const x=(label||'').toUpperCase(); if(x.includes('TRIM')) return 'trim'; if(x.includes('HOLD')) return 'hold'; if(x.includes('WATCH')) return 'watch'; if(x.includes('BUY')) return 'buy'; return 'default'; }
     function sanitizeAlert(label){ return (label || '—').replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/gu,'').trim(); }
+    function displayPercent(raw, digits=1){ const n=num(raw); if(n==null) return '—'; const val = Math.abs(n) <= 1 ? n*100 : n; return val.toFixed(digits) + '%'; }
     function rngFromTicker(t){let s=[...t].reduce((a,c)=>a+c.charCodeAt(0),0);return()=>{s=(s*9301+49297)%233280;return s/233280;}}
-    function makeSeries(t,b){const r=rngFromTicker(t);const x=[],y=[],v=[];let p=(b||100)*(0.97+r()*0.05);for(let i=0;i<30;i++){p=Math.max(1,p*(0.994+r()*0.012));x.push(i);y.push(+p.toFixed(2));v.push(Math.round(250+r()*1000));}return{x,y,v}}
+    function makeSeries(t,b){const r=rngFromTicker(t);const x=[],y=[],v=[];let p=(b||100)*(0.97+r()*0.05);for(let i=0;i<24;i++){p=Math.max(1,p*(0.994+r()*0.012));x.push(i);y.push(+p.toFixed(2));v.push(Math.round(250+r()*1000));}return{x,y,v}}
     function createCard(row){
-      const ticker=row.ticker || '—'; const price=num(row.price); const prev=num(row.prev_close); const open=num(row.open); const roe=pctOrNum(row.ROE); const de=num(row['D/E']); const pfcf=num(row['P/FCF']); const pos=row.position_size || '—'; const pe=num(row['P/E']); const eps=num(row.EPS); const market=row.market_cap; const volume=row.volume; const label=sanitizeAlert(row.alert_label);
-      const change=(price!=null && prev!=null) ? price-prev : null; const pct=(price!=null && prev!=null && prev!==0) ? (change/prev*100) : null; const trend=change!=null && change>=0 ? 'up' : 'down';
+      const ticker=(row.ticker || '').trim(); if(!ticker) return null;
+      const price=num(row.price); const prev=num(row.prev_close); const open=num(row.open); const de=num(row['D/E']); const pfcf=num(row['P/FCF']); const pe=num(row['P/E']); const eps=num(row.EPS); const label=sanitizeAlert(row.alert_label); const change=(price!=null && prev!=null)?price-prev:null; const pct=(price!=null && prev!=null && prev!==0)?(change/prev*100):null; const trend=change!=null && change>=0?'up':'down';
       const id='chart-'+ticker.replace(/[^a-zA-Z0-9]/g,''); const card=document.createElement('section'); card.className='card';
-      card.innerHTML=`<div class="head"><div class="row"><div><h2 class="ticker">${ticker}</h2><div class="meta">${row.company_name || '—'} · ${row.exchange || '—'}</div></div><div class="meta">Feed row</div></div><div class="price">${money(price)}</div><div class="delta ${trend}">${change==null?'—':(change>=0?'+':'')+change.toFixed(2)} · ${pct==null?'—':(pct>=0?'+':'')+pct.toFixed(2)+'%'}</div></div><div id="${id}" class="chart"></div><div class="alertbar"><span class="pill ${alertClass(label)}">${label || 'No alert'}</span><span class="meta">Sheet-driven alert</span></div><div class="stats"><div class="stat"><div class="label">Prev close</div><div class="value">${money(prev)}</div></div><div class="stat"><div class="label">Open</div><div class="value">${money(open)}</div></div><div class="stat"><div class="label">ROE</div><div class="value">${roe==null?'—':roe.toFixed(3)}</div></div><div class="stat"><div class="label">D/E</div><div class="value">${de==null?'—':de.toFixed(2)}</div></div><div class="stat"><div class="label">P/FCF</div><div class="value">${pfcf==null?'—':pfcf.toFixed(2)}</div></div><div class="stat"><div class="label">Position size</div><div class="value">${pos || '—'}</div></div><div class="stat"><div class="label">P/E</div><div class="value">${pe==null?'—':pe.toFixed(2)}</div></div><div class="stat"><div class="label">EPS</div><div class="value">${eps==null?'—':eps.toFixed(2)}</div></div><div class="stat"><div class="label">Market cap</div><div class="value">${market?cap(market):'—'}</div></div><div class="stat"><div class="label">Volume</div><div class="value">${volume || '—'}</div></div></div><div class="rules">This card reads directly from your Google Sheets DashboardFeed CSV. Only the first 10 rows are shown in the dashboard.</div>`;
+      card.innerHTML=`<div class="head"><div class="row"><div><h2 class="ticker">${ticker}</h2><div class="meta">${row.company_name || '—'} · ${row.exchange || '—'}</div></div><div class="meta">Feed row</div></div><div class="price">${money(price)}</div><div class="delta ${trend}">${change==null?'—':(change>=0?'+':'')+change.toFixed(2)} · ${pct==null?'—':(pct>=0?'+':'')+pct.toFixed(2)+'%'}</div></div><div id="${id}" class="chart"></div><div class="alertbar"><span class="pill ${alertClass(label)}">${label || 'No alert'}</span><span class="meta">Sheet-driven</span></div><div class="stats"><div class="stat"><div class="label">Prev close</div><div class="value">${money(prev)}</div></div><div class="stat"><div class="label">Open</div><div class="value">${money(open)}</div></div><div class="stat"><div class="label">ROE</div><div class="value">${displayPercent(row.ROE)}</div></div><div class="stat"><div class="label">D/E</div><div class="value">${de==null?'—':de.toFixed(2)}</div></div><div class="stat"><div class="label">P/FCF</div><div class="value">${pfcf==null?'—':pfcf.toFixed(2)}</div></div><div class="stat"><div class="label">Position size</div><div class="value">${row.position_size || '—'}</div></div><div class="stat"><div class="label">P/E</div><div class="value">${pe==null?'—':pe.toFixed(2)}</div></div><div class="stat"><div class="label">EPS</div><div class="value">${eps==null?'—':eps.toFixed(2)}</div></div><div class="stat"><div class="label">Market cap</div><div class="value">${row.market_cap?cap(row.market_cap):'—'}</div></div><div class="stat"><div class="label">Volume</div><div class="value">${row.volume || '—'}</div></div></div><div class="rules">Up to 20 tickers are shown. Blank rows in DashboardFeed are skipped, so the dashboard shrinks naturally when fewer tickers are present.</div>`;
       requestAnimationFrame(()=>renderChart(id, ticker, price, prev, trend));
       return card;
     }
     function renderChart(id,ticker,price,prev,trend){
       const {x,y,v}=makeSeries(ticker, price || 100); const surface=getComputedStyle(document.documentElement).getPropertyValue('--surface').trim(); const border=getComputedStyle(document.documentElement).getPropertyValue('--border').trim(); const muted=getComputedStyle(document.documentElement).getPropertyValue('--muted').trim(); const line=trend==='up'?'#2c7a3f':'#b33a3a'; const ref=prev || y[0];
-      Plotly.newPlot(id,[{x,y:v,type:'bar',yaxis:'y2',marker:{color:'rgba(1,105,111,.2)'},hoverinfo:'skip'},{x,y,type:'scatter',mode:'lines',line:{color:line,width:2.5},hovertemplate:'$%{y:.2f}<extra></extra>'},{x:[x[0],x[x.length-1]],y:[ref,ref],type:'scatter',mode:'lines',line:{color:'#9b978f',width:1,dash:'dot'},hoverinfo:'skip'}],{margin:{l:36,r:10,t:6,b:18},paper_bgcolor:surface,plot_bgcolor:surface,showlegend:false,xaxis:{showgrid:false,zeroline:false,showticklabels:false,fixedrange:true},yaxis:{showgrid:true,gridcolor:border,zeroline:false,fixedrange:true,tickfont:{size:10,color:muted}},yaxis2:{overlaying:'y',side:'right',showgrid:false,showticklabels:false,fixedrange:true,rangemode:'tozero'},height:132},{displayModeBar:false,responsive:true});
+      Plotly.newPlot(id,[{x,y:v,type:'bar',yaxis:'y2',marker:{color:'rgba(1,105,111,.2)'},hoverinfo:'skip'},{x,y,type:'scatter',mode:'lines',line:{color:line,width:2.2},hovertemplate:'$%{y:.2f}<extra></extra>'},{x:[x[0],x[x.length-1]],y:[ref,ref],type:'scatter',mode:'lines',line:{color:'#9b978f',width:1,dash:'dot'},hoverinfo:'skip'}],{margin:{l:30,r:8,t:6,b:16},paper_bgcolor:surface,plot_bgcolor:surface,showlegend:false,xaxis:{showgrid:false,zeroline:false,showticklabels:false,fixedrange:true},yaxis:{showgrid:true,gridcolor:border,zeroline:false,fixedrange:true,tickfont:{size:9,color:muted}},yaxis2:{overlaying:'y',side:'right',showgrid:false,showticklabels:false,fixedrange:true,rangemode:'tozero'},height:110},{displayModeBar:false,responsive:true});
     }
     async function loadFeed(){
       const url=document.getElementById('csvUrl').value.trim(); const status=document.getElementById('status'); const grid=document.getElementById('grid');
       status.textContent='Loading CSV feed...'; grid.innerHTML='';
       try{
-        const res=await fetch(url); if(!res.ok) throw new Error('HTTP '+res.status); const text=await res.text(); const rows=parseCSV(text).slice(0,10);
-        if(!rows.length) throw new Error('No rows found in CSV');
-        rows.forEach(r=>grid.appendChild(createCard(r)));
-        while(grid.children.length<10){const card=document.createElement('section');card.className='card';card.innerHTML='<div class="head"><h2 class="ticker">Empty slot</h2><div class="meta">Dashboard shows the first 10 rows only.</div></div><div style="flex:1"></div><div class="rules">Add more rows in DashboardFeed or reorder your sheet to control which 10 appear.</div>';grid.appendChild(card);}
-        status.textContent=`Loaded ${rows.length} rows from your published DashboardFeed CSV.`;
+        const res=await fetch(url); if(!res.ok) throw new Error('HTTP '+res.status); const text=await res.text();
+        const rows=parseCSV(text).filter(r => (r.ticker || '').trim() !== '').slice(0,20);
+        if(!rows.length) throw new Error('No non-blank ticker rows found in CSV');
+        rows.forEach(r => { const card=createCard(r); if(card) grid.appendChild(card); });
+        status.textContent=`Loaded ${rows.length} tickers from DashboardFeed. Blank rows are skipped automatically.`;
       }catch(err){
-        status.textContent='Load failed: '+err.message+' — check publish settings and GitHub Pages fetch permissions.';
+        status.textContent='Load failed: '+err.message+' — check publish settings and CSV availability.';
       }
     }
     let dark=false; document.getElementById('loadBtn').addEventListener('click', loadFeed); document.getElementById('themeBtn').addEventListener('click',()=>{dark=!dark;document.documentElement.setAttribute('data-theme',dark?'dark':'light');document.getElementById('themeBtn').textContent=dark?'Light mode':'Dark mode'; loadFeed();}); loadFeed();
